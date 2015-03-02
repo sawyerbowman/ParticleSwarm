@@ -37,6 +37,13 @@ public:
     void setGBestAccel(int dimNumber);
     void setGBestValue();
     
+    //topology functions
+    void globalTop();
+    void ringTop();
+    void vonNuemannTop();
+    void randomTop();
+    
+    
 private:
     //global best information
     vector<double> gBestPos;
