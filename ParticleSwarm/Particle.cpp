@@ -73,6 +73,7 @@ double Particle::eval(string function, vector<double> position){
     else{
         return evalRastrigin(position);
     }
+    return 0;
 }
 
 /**
@@ -102,6 +103,14 @@ double Particle::evalAckley(vector<double> pos){
         secondSum += cos(2.0*M_PI*pos[i]);
     }
     return -20.0 * exp(-.2*sqrt(firstSum/2.0)) - exp(secondSum/2.0) + 20.0 + M_E;
+}
+
+/**
+ *Evaluate using the Rosenbrock function
+ */
+
+double Particle::evalRosenbrock(vector<double> pos){
+    return 0;
 }
 
 

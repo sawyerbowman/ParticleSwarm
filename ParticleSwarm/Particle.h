@@ -41,7 +41,7 @@ public:
     double getVelocity(int dimNumber);
     double getAccel(int dimNumber);
     double getPBest(int dimNumber);
-    double getPBestValue(){ return pBestValue; };
+    double getPBestValue(){ return pBestValue; }
     
     //setter functions
     void setPosition(int dimNumber, double posValue);
