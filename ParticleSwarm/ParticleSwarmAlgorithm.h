@@ -16,6 +16,7 @@
 using namespace std;
 
 class ParticleSwarmAlgorithm{
+    
 public:
     ParticleSwarmAlgorithm(string topology, int swarmSize, int iterations, string
                            function, int dimensions);

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
@@ -49,8 +50,11 @@ public:
     void setPBest(int dimNumber, double posValue);
     void setPBestValue(double newPBestValue);
     
-    //TODO: need to implement the eval function
-    double eval(string function, vector<double> position);
+    //test functions
+    double eval(string function, vector<double> pos);
+    double evalRosenbrock(vector<double> pos);
+    double evalAckley(vector<double> pos);
+    double evalRastrigin(vector<double> pos);
     
 private:
     double getRandomNumberInRange(double num1, double num2);
@@ -67,7 +71,7 @@ private:
     //information about the personal best positions, accelerations, and values
     vector<double> pBestPos;
     
-    //TODO: do we need this variable?
+    //TODO: do we need this variable? Yes, in order to update the acceleration.
     vector<double> pBestAccel;
 
     double pBestValue;

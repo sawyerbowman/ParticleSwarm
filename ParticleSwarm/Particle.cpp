@@ -65,7 +65,30 @@ double Particle::getRandomNumberInRange(double min, double max){
 //TODO: IMPLEMENT THIS!
 
 double Particle::eval(string function, vector<double> position){
-    return 0;
+    
+    if(function == "ROSENBROCK"){
+        return evalRosenbrock(position);
+    }
+    else if(function == "ACKLEY"){
+        return evalAckley(position);
+    }
+    else{
+        return evalRastrigin(position);
+    }
+}
+
+/**
+ *Evaluate using the Rastrigin function
+ */
+
+double Particle::evalRastrigin(vector<double> pos){
+    
+    double retVal = 0;
+    //Loop through all dimensions of the pos vector.
+    for(int i = 0; i < pos.size(); i++){
+        retVal += pos.at(i)*pos.at(i) - 10.0*cos(2.0*M_PI*pos.at(i)) + 10.0;
+    }
+    return retVal;
 }
 
 

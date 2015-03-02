@@ -37,12 +37,6 @@ public:
     void setGBestAccel(int dimNumber);
     void setGBestValue();
     
-    //test functions
-    double eval(int functionNumber, vector<double> pos);
-    double evalRosenbrock(vector<double> pos);
-    double evalAckley(vector<double> pos);
-    double evalRastrigin(vector<double> pos);
-    
 private:
     //global best information
     vector<double> gBestPos;
