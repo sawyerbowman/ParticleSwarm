@@ -10,6 +10,7 @@
 #define __ParticleSwarm__Particle__
 
 #include <stdio.h>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -17,11 +18,22 @@ using namespace std;
 //constant used to calculate new particle velocities
 const double phi1 = 2.05;
 
+//ranges of values for position depending on functions
+const double ROK_POS[2] = {15, 30};
+const double ACK_POS[2] = {16, 32};
+const double RAS_POS[2] = {2.56, 5.12};
+
+//ranges of values for position depending on functions
+const double ROK_VEL[2] = {-2, 2};
+const double ACK_VEL[2] = {-2, 4};
+const double RAS_VEL[2] = {-2, 4};
+
+
 class Particle {
     
 public:
     //constructor function
-    Particle();
+    Particle(int dimensions, string function);
     
     //getter functions
     double getPosition(int dimNumber);
@@ -37,7 +49,12 @@ public:
     void setPBest(int dimNumber, double posValue);
     void setPBestValue(double newPBestValue);
     
+    //TODO: need to implement the eval function
+    double eval(string function, vector<double> position);
+    
 private:
+    double getRandomNumberInRange(double num1, double num2);
+    
     //information about the particle's position as a vector
     vector<double> position;
     
@@ -49,7 +66,10 @@ private:
     
     //information about the personal best positions, accelerations, and values
     vector<double> pBestPos;
+    
+    //TODO: do we need this variable?
     vector<double> pBestAccel;
+
     double pBestValue;
     
 };

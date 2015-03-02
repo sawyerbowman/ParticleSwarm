@@ -10,7 +10,9 @@
 #define __ParticleSwarm__Swarm__
 
 #include <stdio.h>
+#include <iostream>
 #include <vector>
+#include "Particle.h"
 
 using namespace std;
 
@@ -22,7 +24,7 @@ class Swarm {
     
 public:
     //constructor function
-    Swarm(int numParticles);
+    Swarm(int numParticles, int dimensions, string function);
     
     //getter functions
     double getGBestPos(int dimNumber);
@@ -49,6 +51,9 @@ private:
     
     //number of particles in swarm
     int numParticles;
+    
+    //vector containing each particle
+    vector<Particle*> particles;
     
 };
 
