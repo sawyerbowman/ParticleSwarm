@@ -26,5 +26,16 @@ Swarm::Swarm(int numParticles, int dimensions, string function){
 
 void Swarm::randomTop(int k){
     
+    int count = k-1;
+    bool usedParticles[particles.size()];
+    //initialize the usedParticles vector to all false.
+    for(int i = 0; i < particles.size(); i++){
+        usedParticles[i] = false;
+    }
+    
+    //while loop to choose k-1 individuals with no repetition
+    while(count != 0){
+        
+    }
 }
 
