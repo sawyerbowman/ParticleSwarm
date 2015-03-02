@@ -52,12 +52,14 @@ public:
     
     //test functions
     double eval(string function, vector<double> pos);
-    double evalRosenbrock(vector<double> pos);
-    double evalAckley(vector<double> pos);
-    double evalRastrigin(vector<double> pos);
     
 private:
     double getRandomNumberInRange(double num1, double num2);
+    
+    //test functions
+    double evalRosenbrock(vector<double> pos);
+    double evalAckley(vector<double> pos);
+    double evalRastrigin(vector<double> pos);
     
     //information about the particle's position as a vector
     vector<double> position;

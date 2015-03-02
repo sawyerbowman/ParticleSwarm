@@ -62,8 +62,6 @@ double Particle::getRandomNumberInRange(double min, double max){
  *Evaluate using the selected function and return a value
  */
 
-//TODO: IMPLEMENT THIS!
-
 double Particle::eval(string function, vector<double> position){
     
     if(function == "ROSENBROCK"){
@@ -89,6 +87,21 @@ double Particle::evalRastrigin(vector<double> pos){
         retVal += pos.at(i)*pos.at(i) - 10.0*cos(2.0*M_PI*pos.at(i)) + 10.0;
     }
     return retVal;
+}
+
+/**
+ *Evaluate using the Ackley function
+ */
+
+double Particle::evalAckley(vector<double> pos){
+    double firstSum;
+    double secondSum;
+    //Loop through all dimensions of the pos vector
+    for(int i= 0; i < pos.size(); i++){
+        firstSum += pos[i]*pos[i];
+        secondSum += cos(2.0*M_PI*pos[i]);
+    }
+    return -20.0 * exp(-.2*sqrt(firstSum/2.0)) - exp(secondSum/2.0) + 20.0 + M_E;
 }
 
 
