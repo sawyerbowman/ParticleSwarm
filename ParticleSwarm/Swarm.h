@@ -40,8 +40,8 @@ public:
     //topology functions
     void globalTop();
     void ringTop();
-    void vonNuemannTop();
-    void randomTop();
+    void vonNeumannTop();
+    void randomTop(int k);
     
     
 private:

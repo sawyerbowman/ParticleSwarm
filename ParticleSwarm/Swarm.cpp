@@ -19,3 +19,12 @@ Swarm::Swarm(int numParticles, int dimensions, string function){
         particles.push_back(newParticle);
     }
 }
+
+/**
+ *Random topology function.
+ */
+
+void Swarm::randomTop(int k){
+    
+}
+
