@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		059A1E251AA3A98600063FBF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059A1E241AA3A98600063FBF /* main.cpp */; };
+		05D28C111AA413C200F2D5F3 /* ParticleSwarmAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D28C0F1AA413C200F2D5F3 /* ParticleSwarmAlgorithm.cpp */; };
+		05D28C141AA4140B00F2D5F3 /* Swarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D28C121AA4140B00F2D5F3 /* Swarm.cpp */; };
+		05D28C171AA4143900F2D5F3 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D28C151AA4143900F2D5F3 /* Particle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,12 @@
 /* Begin PBXFileReference section */
 		059A1E211AA3A98600063FBF /* ParticleSwarm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ParticleSwarm; sourceTree = BUILT_PRODUCTS_DIR; };
 		059A1E241AA3A98600063FBF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		05D28C0F1AA413C200F2D5F3 /* ParticleSwarmAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSwarmAlgorithm.cpp; sourceTree = "<group>"; };
+		05D28C101AA413C200F2D5F3 /* ParticleSwarmAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSwarmAlgorithm.h; sourceTree = "<group>"; };
+		05D28C121AA4140B00F2D5F3 /* Swarm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Swarm.cpp; sourceTree = "<group>"; };
+		05D28C131AA4140B00F2D5F3 /* Swarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swarm.h; sourceTree = "<group>"; };
+		05D28C151AA4143900F2D5F3 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		05D28C161AA4143900F2D5F3 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,12 @@
 			isa = PBXGroup;
 			children = (
 				059A1E241AA3A98600063FBF /* main.cpp */,
+				05D28C0F1AA413C200F2D5F3 /* ParticleSwarmAlgorithm.cpp */,
+				05D28C101AA413C200F2D5F3 /* ParticleSwarmAlgorithm.h */,
+				05D28C121AA4140B00F2D5F3 /* Swarm.cpp */,
+				05D28C131AA4140B00F2D5F3 /* Swarm.h */,
+				05D28C151AA4143900F2D5F3 /* Particle.cpp */,
+				05D28C161AA4143900F2D5F3 /* Particle.h */,
 			);
 			path = ParticleSwarm;
 			sourceTree = "<group>";
@@ -118,7 +133,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D28C111AA413C200F2D5F3 /* ParticleSwarmAlgorithm.cpp in Sources */,
+				05D28C171AA4143900F2D5F3 /* Particle.cpp in Sources */,
 				059A1E251AA3A98600063FBF /* main.cpp in Sources */,
+				05D28C141AA4140B00F2D5F3 /* Swarm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +250,7 @@
 				059A1E2A1AA3A98600063FBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
