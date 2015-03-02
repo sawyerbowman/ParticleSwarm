@@ -39,3 +39,28 @@ void Swarm::randomTop(int k){
     }
 }
 
+/*
+ * Get global best position function
+ */
+double Swarm::getGBestPos(int dimNumber) {
+    return gBestPos.at(dimNumber);
+}
+
+/* 
+ * Get global best acceleration function
+ */
+double Swarm::getGBestAccel(int dimNumber) {
+    return gBestAccel.at(dimNumber);
+}
+
+/*
+ * Set global best position function
+ */
+void Swarm::setGBestPos(int dimNumber) {
+    
+}
+
+// Global neighborhood topology function
+void globalTop(){
+    
+}
