@@ -73,7 +73,7 @@ private:
     //information about the personal best positions, accelerations, and values
     vector<double> pBestPos;
     
-    //TODO: do we need this variable? Yes, in order to update the acceleration.
+    //TODO: do we need this variable? Yes, in order to update the acceleration. derping test
     vector<double> pBestAccel;
 
     double pBestValue;
