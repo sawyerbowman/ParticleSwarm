@@ -42,6 +42,7 @@ public:
     double getAccel(int dimNumber);
     double getPBest(int dimNumber);
     double getPBestValue(){ return pBestValue; }
+    long getNumDim(){ return position.size(); };
     
     //setter functions
     void setPosition(int dimNumber, double posValue);

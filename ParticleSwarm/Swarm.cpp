@@ -24,7 +24,7 @@ Swarm::Swarm(int numParticles, int dimensions, string function){
  *Random topology function.
  */
 
-void Swarm::randomTop(int k){
+void Swarm::randomTop(int k, int particleNumber){
     
     int count = k-1;
     bool usedParticles[particles.size()];
@@ -35,7 +35,10 @@ void Swarm::randomTop(int k){
     
     //while loop to choose k-1 individuals with no repetition
     while(count != 0){
-        
+        int randParticle = rand() % numParticles;
+        if(usedParticles[randParticle] == false && randParticle != particleNumber){
+            
+        }
     }
 }
 
@@ -56,8 +59,24 @@ double Swarm::getGBestAccel(int dimNumber) {
 /*
  * Set global best position function
  */
-void Swarm::setGBestPos(int dimNumber) {
-    
+void Swarm::setGBestPos(int dimNumber, double newGBestPos) {
+    gBestPos.at(dimNumber) = newGBestPos;
+}
+
+/*
+ * Set global best acceleration
+ */
+
+void Swarm::setGBestAccel(int dimNumber, double newGBestAccel){
+    gBestAccel.at(dimNumber) = newGBestAccel;
+}
+
+/*
+ * Set global best value
+ */
+
+void Swarm::setGBestValue(double newGBestValue){
+    gBestValue = newGBestValue;
 }
 
 // Global neighborhood topology function

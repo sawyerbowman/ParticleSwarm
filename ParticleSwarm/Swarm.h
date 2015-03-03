@@ -10,6 +10,7 @@
 #define __ParticleSwarm__Swarm__
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <vector>
 #include "Particle.h"
@@ -33,15 +34,15 @@ public:
     double getNumParticles(){ return numParticles; };
     
     //setter functions
-    void setGBestPos(int dimNumber);
-    void setGBestAccel(int dimNumber);
-    void setGBestValue();
+    void setGBestPos(int dimNumber, double newGBestPos);
+    void setGBestAccel(int dimNumber, double newGBestAccel);
+    void setGBestValue(double newGBestValue);
     
     //topology functions
     void globalTop();
     void ringTop();
     void vonNeumannTop();
-    void randomTop(int k);
+    void randomTop(int k, int particleNumber);
     
     
 private:
