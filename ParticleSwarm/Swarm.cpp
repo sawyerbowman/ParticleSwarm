@@ -117,7 +117,12 @@ void Swarm::vonNeumannTop(int dimensions, string function){
             particles[i]->setAllBestPositions(particles[i]->getAllPositions());
         }
         
-        //TODO: update the global best (is this needed for neighborhoods?)
+        //update the global best
+        if (particles[i]->getPBestValue() < gBestValue){
+            gBestValue = particles[i]->getPBestValue();
+            setAllGBestPos(particles[i]->getAllBestPos());
+            setAllGBestAccel(particles[i]->getAllBestAccel());
+        }
     }
 }
 
