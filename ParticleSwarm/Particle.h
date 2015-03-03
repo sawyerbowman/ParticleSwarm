@@ -37,14 +37,16 @@ public:
     Particle(int dimensions, string function);
     
     //getter functions
-    double getPosition(int dimNumber);
+    vector<double> getAllPositions() { return position; }
+    double getPosition(int dimNumber) { return position[dimNumber]; }
     double getVelocity(int dimNumber);
     double getAccel(int dimNumber);
-    double getPBest(int dimNumber);
+    double getPBest(int dimNumber) { return pBestPos[dimNumber]; }
     double getPBestValue(){ return pBestValue; }
     long getNumDim(){ return position.size(); };
     
     //setter functions
+    void setAllBestPositions(vector<double> bestPos) { pBestPos = bestPos; }
     void setPosition(int dimNumber, double posValue);
     void setVelocity(int dimNumber, double velValue);
     void setAccel(int dimNumber, double accelValue);

@@ -41,11 +41,19 @@ public:
     //topology functions
     void globalTop();
     void ringTop();
-    void vonNeumannTop();
+    void vonNeumannTop(int dimensions, string function);
     void randomTop(int k, int particleNumber);
     
     
 private:
+    //functions for Von Neumann Topology
+    int findFactor();
+    vector<Particle*> initializeNeighborhood(int index, int rows, int cols);
+    
+    double findBestPositionInNeighborhood(vector<Particle*> neighborhood,
+                                          Particle* curParticle, int dim);
+    
+    
     //global best information
     vector<double> gBestPos;
     vector<double> gBestAccel;
