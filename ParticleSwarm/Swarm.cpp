@@ -42,6 +42,33 @@ void Swarm::randomTop(int k, int particleNumber){
     }
 }
 
+//node for the doubly linked list in ringTop function.
+struct node{
+    node* next;
+    node* prev;
+};
+
+/*
+ *Ring topology function.
+ */
+
+void Swarm::ringTop(){
+    node* head;
+    node* tail;
+    node* conductor;
+    
+    conductor = new node;
+    conductor->prev = NULL;
+    head = conductor;
+    tail = conductor;
+    
+    conductor = new node;
+    conductor->prev = tail;
+    tail->next = conductor;
+    tail = conductor;
+    
+}
+
 /**
  *Von Neumann topology function
  */
@@ -173,6 +200,7 @@ int Swarm::findFactor(){
 }
 
 /**
+>>>>>>> Von Neumann Implemented
  * Get global best position function
  */
 
