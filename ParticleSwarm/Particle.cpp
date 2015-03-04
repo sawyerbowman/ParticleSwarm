@@ -94,9 +94,8 @@ double Particle::evalRastrigin(vector<double> pos){
  */
 
 double Particle::evalAckley(vector<double> pos){
-    double firstSum;
-    double secondSum;
-    
+    double firstSum = 0;
+    double secondSum = 0;
     //Loop through all dimensions of the pos vector
     for(int i= 0; i < pos.size(); i++){
         firstSum += pos[i]*pos[i];

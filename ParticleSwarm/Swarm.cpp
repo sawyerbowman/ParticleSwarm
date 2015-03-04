@@ -18,6 +18,10 @@ Swarm::Swarm(int numParticles, int dimensions, string function){
     for (int i = 0; i < numParticles; i++){
         Particle *newParticle = new Particle(dimensions, function);
         particles.push_back(newParticle);
+        if (newParticle->getPBestValue() < this->gBestValue){
+            this->gBestValue = newParticle->getPBestValue();
+            this->gBestPos = newParticle->getAllBestPos();
+        }
     }
 }
 
@@ -32,7 +36,6 @@ void Swarm::randomTop(int k, int dimensions, string function){
     
     for(int i = 0; i < particles.size(); i++){
         neighborhood = initializeNeighborhood(i, k);
-        
         double randNum = (double) rand() / (double) RAND_MAX;
         double persRand = randNum*phi1;
         double neighRand = randNum*phi2;
@@ -184,7 +187,6 @@ void Swarm::vonNeumannTop(int dimensions, string function){
     vector<Particle*> neighborhood;
     for (int i = 0; i < particles.size(); i++){
         neighborhood = initializeNeighborhood(i, rows, cols);
-        
         double randNum = (double) rand() / (double) RAND_MAX;
         double persRand = randNum*phi1;
         double neighRand = randNum*phi2;
@@ -366,6 +368,12 @@ void Swarm::globalTop(int dimensions, string function){
         if (newValue < particles[i]->getPBestValue()){
             particles[i]->setPBestValue(newValue);
             particles[i]->setAllBestPositions(particles[i]->getAllPositions());
+        }
+        
+        //update the global best
+        if (particles[i]->getPBestValue() < gBestValue){
+            gBestValue = particles[i]->getPBestValue();
+            setAllGBestPos(particles[i]->getAllBestPos());
         }
     }
 }

@@ -17,7 +17,9 @@ using namespace std;
  */
 
 int main(int argc, const char * argv[]) {
-    if (argc < 6) {
+    srand( time( NULL ) );
+    
+    if (argc != 6) {
         cout << "Please enter the correct number of parameters for particle swarm "
                 "algorithm!" << endl;
         cout << "Topology:       which neighborhood topology to test ex. gl, ri, "
