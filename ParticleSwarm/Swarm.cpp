@@ -88,7 +88,7 @@ void Swarm::update(int dimensions, string function, string topology){
             //Compute acceleration due to neighborhood best
             double accelNeighBest = (findBestPositionInNeighborhood(neighborhood,
                                                                     particles[i],
-                                                                    d, function)
+                                                                    d, topology)
                                      - particles[i]->getPosition(d)) * neighRand;
             
             //constrict the new velocity
@@ -154,9 +154,9 @@ vector<Particle*> Swarm::initializeNeighborhood(int index){
 
 double Swarm::findBestPositionInNeighborhood(vector<Particle*> neighborhood,
                                              Particle* curParticle, int dim,
-                                             string function){
+                                             string toplogy){
     //if global, just return global best position at a particular dimension
-    if (function == "gl"){
+    if (toplogy == "gl"){
         return getGBestPos(dim);
     }
     

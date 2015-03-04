@@ -54,7 +54,7 @@ private:
     
     double findBestPositionInNeighborhood(vector<Particle*> neighborhood,
                                           Particle* curParticle, int dim,
-                                          string function);
+                                          string toplogy);
     
     //global best information
     vector<double> gBestPos;
