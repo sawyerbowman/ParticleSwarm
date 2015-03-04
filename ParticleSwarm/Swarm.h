@@ -43,7 +43,7 @@ public:
     
     //topology functions
     void globalTop();
-    void ringTop();
+    void ringTop(int dimensions);
     void vonNeumannTop(int dimensions, string function);
     void randomTop(int k, int dimensions, string function);
     
@@ -55,6 +55,9 @@ private:
 
     //function for Random Topology
     vector<Particle*> initializeNeighborhood(int index, int k);
+    
+    //function for Ring Topology
+    vector<Particle*> initializeNeighborhood(int index);
     
     double findBestPositionInNeighborhood(vector<Particle*> neighborhood,
                                           Particle* curParticle, int dim);

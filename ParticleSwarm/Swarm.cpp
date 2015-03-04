@@ -103,32 +103,67 @@ vector<Particle*> Swarm::initializeNeighborhood(int index, int k){
     return neighborhood;
 }
 
-//node for the doubly linked list in ringTop function.
-struct node{
-    node* next;
-    node* prev;
-};
+
 
 /*
  *Ring topology function.
  */
 
-void Swarm::ringTop(){
-    node* head;
-    node* tail;
-    node* conductor;
-    
-    conductor = new node;
-    conductor->prev = NULL;
-    head = conductor;
-    tail = conductor;
-    
-    conductor = new node;
-    conductor->prev = tail;
-    tail->next = conductor;
-    tail = conductor;
-    
+void Swarm::ringTop(int dimensions){
+    vector<Particle*> neighborhood;
+    for (int i = 0; i < particles.size(); i++){
+        neighborhood = initializeNeighborhood(i);
+        double randNum = (double) rand() / (double) RAND_MAX;
+        double persRand = randNum*phi1;
+        double neighRand = randNum*phi2;
+        for (int d = 0; d < dimensions; d++){
+            //Compute acceleration due to personal best
+            double accelPersBest = (particles[i]->getPBest(d) - particles[i]
+                                    ->getPosition(d)) * persRand;
+            
+            //Compute acceleration due to neighborhood best
+            double accelNeighBest = (findBestPositionInNeighborhood(neighborhood, particles[i], d)
+                                     - particles[i]->getPosition(d)) * neighRand;
+            
+            //constrict the new velocity
+            double newVel = constrictionFactor * (particles[i]->getVelocity(d) +
+                                                  accelPersBest + accelNeighBest);
+            
+            //reset the current velocity
+            particles[i]->setVelocity(d, newVel);
+            
+            //find new position
+            double newPos = particles[i]->getPosition(d) + particles[i]->getVelocity(d);
+            
+            //reset the current position
+            particles[i]->setPosition(d, newPos);
+        }
+    }
 }
+
+
+vector<Particle*> Swarm::initializeNeighborhood(int index){
+    vector<Particle*> neighborhood;
+    
+    //if particle is first one in the ring
+    if(index == 0){
+        neighborhood.push_back(particles[particles.size()-1]);
+        neighborhood.push_back(particles[index+1]);
+    }
+    //if particle is the last one in the ring
+    if(index >= particles.size()-1){
+        neighborhood.push_back(particles[0]);
+        neighborhood.push_back(particles[index-1]);
+    }
+    //if particle is in the middle of the ring
+    if(index > 0 && index < particles.size()-1){
+        neighborhood.push_back(particles[index+1]);
+        neighborhood.push_back(particles[index+1]);
+    }
+
+    return neighborhood;
+}
+
 
 /**
  *Von Neumann topology function
