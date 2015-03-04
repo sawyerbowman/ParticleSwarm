@@ -26,59 +26,6 @@ Swarm::Swarm(int numParticles, int dimensions, string function){
 }
 
 /**
- *Random topology function.
- */
-
-void Swarm::randomTop(int k, int dimensions, string function){
-    
-    //each particle has its own neighborhood
-    vector<Particle*> neighborhood;
-    
-    for(int i = 0; i < particles.size(); i++){
-        neighborhood = initializeNeighborhood(i, k);
-        double randNum = (double) rand() / (double) RAND_MAX;
-        double persRand = randNum*phi1;
-        double neighRand = randNum*phi2;
-        for (int d = 0; d < dimensions; d++){
-            //Compute acceleration due to personal best
-            double accelPersBest = (particles[i]->getPBest(d) - particles[i]
-                                    ->getPosition(d)) * persRand;
-            
-            //Compute acceleration due to neighborhood best
-            double accelNeighBest = (findBestPositionInNeighborhood(neighborhood, particles[i], d)
-                                     - particles[i]->getPosition(d)) * neighRand;
-            
-            //constrict the new velocity
-            double newVel = constrictionFactor * (particles[i]->getVelocity(d) +
-                                                  accelPersBest + accelNeighBest);
-            
-            //reset the current velocity
-            particles[i]->setVelocity(d, newVel);
-            
-            //find new position
-            double newPos = particles[i]->getPosition(d) + particles[i]->getVelocity(d);
-            
-            //reset the current position
-            particles[i]->setPosition(d, newPos);
-        }
-        //find the value of the new position
-        double newValue = particles[i]->eval(function, particles[i]->getAllPositions());
-        
-        //update the personal best
-        if (newValue < particles[i]->getPBestValue()){
-            particles[i]->setPBestValue(newValue);
-            particles[i]->setAllBestPositions(particles[i]->getAllPositions());
-        }
-        
-        //update the global best
-        if (particles[i]->getPBestValue() < gBestValue){
-            gBestValue = particles[i]->getPBestValue();
-            setAllGBestPos(particles[i]->getAllBestPos());
-        }
-    }
-}
-
-/**
  * initialize Neighborhood function for random topology
  */
 
@@ -109,84 +56,27 @@ vector<Particle*> Swarm::initializeNeighborhood(int index, int k){
     return neighborhood;
 }
 
-
-
 /**
- *Ring topology function.
+ *The update function tells the particles where to go based on the toplogy.
  */
 
-void Swarm::ringTop(int dimensions){
+void Swarm::update(int dimensions, string function, string topology){
     vector<Particle*> neighborhood;
     for (int i = 0; i < particles.size(); i++){
-        neighborhood = initializeNeighborhood(i);
-        double randNum = (double) rand() / (double) RAND_MAX;
-        double persRand = randNum*phi1;
-        double neighRand = randNum*phi2;
-        for (int d = 0; d < dimensions; d++){
-            //Compute acceleration due to personal best
-            double accelPersBest = (particles[i]->getPBest(d) - particles[i]
-                                    ->getPosition(d)) * persRand;
-            
-            //Compute acceleration due to neighborhood best
-            double accelNeighBest = (findBestPositionInNeighborhood(neighborhood, particles[i], d)
-                                     - particles[i]->getPosition(d)) * neighRand;
-            
-            //constrict the new velocity
-            double newVel = constrictionFactor * (particles[i]->getVelocity(d) +
-                                                  accelPersBest + accelNeighBest);
-            
-            //reset the current velocity
-            particles[i]->setVelocity(d, newVel);
-            
-            //find new position
-            double newPos = particles[i]->getPosition(d) + particles[i]->getVelocity(d);
-            
-            //reset the current position
-            particles[i]->setPosition(d, newPos);
+        //determine neighborhood based on toplogy
+        if (topology == "ri"){
+            neighborhood = initializeNeighborhood(i);
         }
-    }
-}
-
-/**
- * Initialize Neighborhood function for Ring Topology
- */
-
-vector<Particle*> Swarm::initializeNeighborhood(int index){
-    vector<Particle*> neighborhood;
-    
-    //if particle is first one in the ring
-    if(index == 0){
-        neighborhood.push_back(particles[particles.size()-1]);
-        neighborhood.push_back(particles[index+1]);
-    }
-    //if particle is the last one in the ring
-    else if(index >= particles.size()-1){
-        neighborhood.push_back(particles[0]);
-        neighborhood.push_back(particles[index-1]);
-    }
-    //if particle is in the middle of the ring
-    if(index > 0 && index < particles.size()-1){
-        neighborhood.push_back(particles[index+1]);
-        neighborhood.push_back(particles[index+1]);
-    }
-
-    return neighborhood;
-}
-
-
-/**
- *Von Neumann topology function
- */
-
-void Swarm::vonNeumannTop(int dimensions, string function){
-    //initialize the number of rows and cols for the grid representation
-    int rows = findFactor();
-    int cols = numParticles/rows;
-    
-    //each particle has its own neighborhood, intialized in this loop
-    vector<Particle*> neighborhood;
-    for (int i = 0; i < particles.size(); i++){
-        neighborhood = initializeNeighborhood(i, rows, cols);
+        else if (topology == "vn"){
+            int rows = findFactor();
+            int cols = numParticles/rows;
+            neighborhood = initializeNeighborhood(i, rows, cols);
+        }
+        else if (topology == "ra"){
+            neighborhood = initializeNeighborhood(i, k);
+        }
+        
+        //determine attraction to personal and neighborhood best
         double randNum = (double) rand() / (double) RAND_MAX;
         double persRand = randNum*phi1;
         double neighRand = randNum*phi2;
@@ -196,8 +86,10 @@ void Swarm::vonNeumannTop(int dimensions, string function){
                                     ->getPosition(d)) * persRand;
             
             //Compute acceleration due to neighborhood best
-            double accelNeighBest = (findBestPositionInNeighborhood(neighborhood, particles[i], d)
-                                    - particles[i]->getPosition(d)) * neighRand;
+            double accelNeighBest = (findBestPositionInNeighborhood(neighborhood,
+                                                                    particles[i],
+                                                                    d, function)
+                                     - particles[i]->getPosition(d)) * neighRand;
             
             //constrict the new velocity
             double newVel = constrictionFactor * (particles[i]->getVelocity(d) +
@@ -230,12 +122,45 @@ void Swarm::vonNeumannTop(int dimensions, string function){
 }
 
 /**
+ * Initialize Neighborhood function for Ring Topology
+ */
+
+vector<Particle*> Swarm::initializeNeighborhood(int index){
+    vector<Particle*> neighborhood;
+    
+    //if particle is first one in the ring
+    if(index == 0){
+        neighborhood.push_back(particles[particles.size()-1]);
+        neighborhood.push_back(particles[index+1]);
+    }
+    //if particle is the last one in the ring
+    else if(index >= particles.size()-1){
+        neighborhood.push_back(particles[0]);
+        neighborhood.push_back(particles[index-1]);
+    }
+    //if particle is in the middle of the ring
+    if(index > 0 && index < particles.size()-1){
+        neighborhood.push_back(particles[index+1]);
+        neighborhood.push_back(particles[index+1]);
+    }
+
+    return neighborhood;
+}
+
+/**
  *Compare the best position in a particular dimension for each particle in a given
  *neighborhood. Return the highest one. (optimal is small)
  */
 
 double Swarm::findBestPositionInNeighborhood(vector<Particle*> neighborhood,
-                                             Particle* curParticle, int dim){
+                                             Particle* curParticle, int dim,
+                                             string function){
+    //if global, just return global best position at a particular dimension
+    if (function == "gl"){
+        return getGBestPos(dim);
+    }
+    
+    //otherwise, find the best position for a dimension in a neighborhood
     double bestInDim = curParticle->getPBest(dim);
     for (Particle* neighbor : neighborhood){
         if (neighbor->getPBest(dim) < bestInDim){
@@ -305,75 +230,4 @@ int Swarm::findFactor(){
         possibleFactor--;
     }
     return possibleFactor;
-}
-
-/**
- * Get global best position function
- */
-
-double Swarm::getGBestPos(int dimNumber) {
-    return gBestPos.at(dimNumber);
-}
-
-/**
- * Set global best position function
- */
-
-void Swarm::setGBestPos(int dimNumber, double newGBestPos) {
-    gBestPos.at(dimNumber) = newGBestPos;
-}
-
-/**
- * Set global best value
- */
-
-void Swarm::setGBestValue(double newGBestValue){
-    gBestValue = newGBestValue;
-}
-
-/**
- *Global neighborhood topology function
- */
-
-void Swarm::globalTop(int dimensions, string function){
-    for (int i = 0; i < numParticles; i++) {
-        for (int j = 0; j < dimensions; j++) {
-            double randNum = (double) rand() / (double) RAND_MAX;
-            double persRand = randNum*phi1;
-            double globalRand = randNum*phi2;
-            
-            //Calculate acceleration due to personal best
-            double accelPersBest = (particles[i]->getPBest(j) - particles[i]->getPosition(j)) * persRand;
-            
-            //Calculate acceleration due to global best
-            double accelGlobalBest = (getGBestPos(j) - particles[i]->getPosition(j)) * globalRand;
-            
-            //Constrict the new velocity
-            double newVel = constrictionFactor * (particles[i]->getVelocity(j) + accelPersBest + accelGlobalBest);
-            
-            //reset the current velocity
-            particles[i]->setVelocity(j, newVel);
-            
-            //find new position
-            double newPos = particles[i]->getPosition(j) + particles[i]->getVelocity(j);
-            
-            //reset the current position
-            particles[i]->setPosition(j, newPos);
-        }
-        
-        //find the value of the new position
-        double newValue = particles[i]->eval(function, particles[i]->getAllPositions());
-        
-        //update the personal best
-        if (newValue < particles[i]->getPBestValue()){
-            particles[i]->setPBestValue(newValue);
-            particles[i]->setAllBestPositions(particles[i]->getAllPositions());
-        }
-        
-        //update the global best
-        if (particles[i]->getPBestValue() < gBestValue){
-            gBestValue = particles[i]->getPBestValue();
-            setAllGBestPos(particles[i]->getAllBestPos());
-        }
-    }
 }

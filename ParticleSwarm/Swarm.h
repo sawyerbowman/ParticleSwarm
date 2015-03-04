@@ -20,6 +20,7 @@ using namespace std;
 //constants that will be used to calculate new best particle velocities
 const double phi2 = 2.05;
 const double constrictionFactor = .7298;
+const int k = 5;
 
 class Swarm {
     
@@ -28,23 +29,17 @@ public:
     Swarm(int numParticles, int dimensions, string function);
     
     //getter functions
-    double getGBestPos(int dimNumber);
-    double getBestValue(){ return gBestValue; };
-    double getNumParticles(){ return numParticles; };
+    double getGBestPos(int dimNumber) { return gBestPos.at(dimNumber); }
+    double getBestValue() { return gBestValue; }
+    double getNumParticles() { return numParticles; }
     
     //setter functions
     void setAllGBestPos(vector<double> newBestPos) { gBestPos = newBestPos; }
+    void setGBestPos(int dimNumber, double newGBestPos) { gBestPos.at(dimNumber) = newGBestPos; }
+    void setGBestValue(double newGBestValue) { gBestValue = newGBestValue; }
     
-    void setGBestPos(int dimNumber, double newGBestPos);
-    void setGBestValue(double newGBestValue);
-    
-    //topology functions
-
-    void ringTop(int dimensions);
-    void globalTop(int dimensions, string function);
-    void vonNeumannTop(int dimensions, string function);
-    void randomTop(int k, int dimensions, string function);
-    
+    //update function that takes topology into account
+    void update(int dimensions, string function, string topology);
     
 private:
     //functions for Von Neumann Topology
@@ -58,7 +53,8 @@ private:
     vector<Particle*> initializeNeighborhood(int index);
     
     double findBestPositionInNeighborhood(vector<Particle*> neighborhood,
-                                          Particle* curParticle, int dim);
+                                          Particle* curParticle, int dim,
+                                          string function);
     
     //global best information
     vector<double> gBestPos;

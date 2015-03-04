@@ -31,24 +31,7 @@ ParticleSwarmAlgorithm::ParticleSwarmAlgorithm(string topology, int swarmSize,
 void ParticleSwarmAlgorithm::run(){
     //go through the maximum number of iterations
     for (int gen = 0; gen < iterations; gen++){
-        //Run Global topology
-        if(topology == "gl"){
-            swarm->globalTop(dimensions, function);
-        }
-        //Run Ring topology
-        else if (topology == "ri"){
-            swarm->ringTop(dimensions);
-        }
-        //Run Von Neumann topology
-        else if (topology == "vn"){
-            swarm->vonNeumannTop(dimensions, function);
-        }
-        //Run Random topology
-        else {
-            swarm->randomTop(5, dimensions, function);
-        }
+        swarm->update(dimensions, function, topology);
         cout << "iteration " << gen << " gbest value = " << swarm->getBestValue() << endl;
     }
-    
-    cout << "Derp!" << endl;
 }
