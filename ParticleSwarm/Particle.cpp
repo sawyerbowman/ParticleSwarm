@@ -96,12 +96,13 @@ double Particle::evalRastrigin(vector<double> pos){
 double Particle::evalAckley(vector<double> pos){
     double firstSum;
     double secondSum;
+    
     //Loop through all dimensions of the pos vector
     for(int i= 0; i < pos.size(); i++){
         firstSum += pos[i]*pos[i];
         secondSum += cos(2.0*M_PI*pos[i]);
     }
-    return -20.0 * exp(-.2*sqrt(firstSum/2.0)) - exp(secondSum/2.0) + 20.0 + M_E;
+    return -20.0 * exp(-.2*sqrt(firstSum/pos.size())) - exp(secondSum/pos.size()) + 20.0 + M_E;
 }
 
 /**

@@ -72,9 +72,12 @@ void Swarm::randomTop(int k, int dimensions, string function){
             gBestValue = particles[i]->getPBestValue();
             setAllGBestPos(particles[i]->getAllBestPos());
         }
-    
     }
 }
+
+/**
+ * initialize Neighborhood function for random topology
+ */
 
 vector<Particle*> Swarm::initializeNeighborhood(int index, int k){
     
@@ -142,7 +145,7 @@ void Swarm::ringTop(int dimensions){
 }
 
 /**
- *
+ * Initialize Neighborhood function for Ring Topology
  */
 
 vector<Particle*> Swarm::initializeNeighborhood(int index){
