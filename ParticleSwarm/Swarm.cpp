@@ -345,6 +345,39 @@ void Swarm::setGBestValue(double newGBestValue){
  *Global neighborhood topology function
  */
 
-void globalTop(){
-    
+void Swarm::globalTop(int dimensions, string function){
+    for (int i = 0; i < numParticles; i++) {
+        for (int j = 0; j < dimensions; j++) {
+            double randNum = (double) rand() / (double) RAND_MAX;
+            double persRand = randNum*phi1;
+            double globalRand = randNum*phi2;
+            
+            //Calculate acceleration due to personal best
+            double accelPersBest = (particles[i]->getPBest(j) - particles[i]->getPosition(j)) * persRand;
+            
+            //Calculate acceleration due to global best
+            double accelGlobalBest = (getGBestPos(j) - particles[i]->getPosition(j)) * globalRand;
+            
+            //Constrict the new velocity
+            double newVel = constrictionFactor * (particles[i]->getVelocity(j) + accelPersBest + accelGlobalBest);
+            
+            //reset the current velocity
+            particles[i]->setVelocity(j, newVel);
+            
+            //find new position
+            double newPos = particles[i]->getPosition(j) + particles[i]->getVelocity(j);
+            
+            //reset the current position
+            particles[i]->setPosition(j, newPos);
+        }
+        
+        //find the value of the new position
+        double newValue = particles[i]->eval(function, particles[i]->getAllPositions());
+        
+        //update the personal best
+        if (newValue < particles[i]->getPBestValue()){
+            particles[i]->setPBestValue(newValue);
+            particles[i]->setAllBestPositions(particles[i]->getAllPositions());
+        }
+    }
 }
