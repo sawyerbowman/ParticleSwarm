@@ -39,7 +39,7 @@ public:
     void setGBestValue(double newGBestValue);
     
     //topology functions
-    void globalTop();
+    void globalTop(int dimensions, string function);
     void ringTop();
     void vonNeumannTop(int dimensions, string function);
     void randomTop(int k, int particleNumber);
