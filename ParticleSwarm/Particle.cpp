@@ -111,7 +111,7 @@ double Particle::evalAckley(vector<double> pos){
 double Particle::evalRosenbrock(vector<double> pos){
     double retVal = 0;
     //Loop through all dimensions of the pos vector.
-    for(int i = 0; i < pos.size(); i++){
+    for(int i = 0; i < pos.size()-1; i++){
         retVal += (1-pos[i])*(1-pos[i]) + 100*(pos[i+1]-pos[i]*pos[i])*(pos[i+1]-pos[i]*pos[i]);
     }
     return retVal;

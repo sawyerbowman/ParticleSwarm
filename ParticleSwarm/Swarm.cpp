@@ -160,7 +160,7 @@ vector<Particle*> Swarm::initializeNeighborhood(int index){
         neighborhood.push_back(particles[index+1]);
     }
     //if particle is the last one in the ring
-    if(index >= particles.size()-1){
+    else if(index >= particles.size()-1){
         neighborhood.push_back(particles[0]);
         neighborhood.push_back(particles[index-1]);
     }
