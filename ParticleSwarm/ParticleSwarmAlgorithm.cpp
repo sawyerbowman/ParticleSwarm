@@ -33,11 +33,11 @@ void ParticleSwarmAlgorithm::run(){
     for (int gen = 0; gen < iterations; gen++){
         //Run Global topology
         if(topology == "gl"){
-            swarm->globalTop();
+            //swarm->globalTop();
         }
         //Run Ring topology
         else if (topology == "ri"){
-            swarm->ringTop();
+            //swarm->ringTop();
         }
         //Run Von Neumann topology
         else if (topology == "vn"){

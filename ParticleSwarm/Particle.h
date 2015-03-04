@@ -42,8 +42,8 @@ public:
     vector<double> getAllBestAccel() { return pBestAccel; }
     
     double getPosition(int dimNumber) { return position[dimNumber]; }
-    double getVelocity(int dimNumber);
-    double getAccel(int dimNumber);
+    double getVelocity(int dimNumber) { return velocity[dimNumber]; }
+    double getAccel(int dimNumber) { return acceleration[dimNumber]; }
     double getPBest(int dimNumber) { return pBestPos[dimNumber]; }
     double getPBestValue(){ return pBestValue; }
     long getNumDim(){ return position.size(); };
@@ -51,11 +51,11 @@ public:
     //setter functions
     void setAllBestPositions(vector<double> bestPos) { pBestPos = bestPos; }
     
-    void setPosition(int dimNumber, double posValue);
-    void setVelocity(int dimNumber, double velValue);
-    void setAccel(int dimNumber, double accelValue);
-    void setPBest(int dimNumber, double posValue);
-    void setPBestValue(double newPBestValue);
+    void setPosition(int dimNumber, double posValue) { position[dimNumber] = posValue; }
+    void setVelocity(int dimNumber, double velValue) { velocity[dimNumber] = velValue; }
+    void setAccel(int dimNumber, double accelValue) { acceleration[dimNumber] = accelValue; }
+    void setPBest(int dimNumber, double posValue) { pBestPos[dimNumber] = posValue; }
+    void setPBestValue(double newPBestValue) { pBestValue = newPBestValue; }
     
     //test functions
     double eval(string function, vector<double> pos);
