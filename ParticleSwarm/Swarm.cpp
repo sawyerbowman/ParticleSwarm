@@ -13,6 +13,7 @@
  */
 
 Swarm::Swarm(int numParticles, int dimensions, string function){
+    this->gBestValue = RAND_MAX;
     this->numParticles = numParticles;
     for (int i = 0; i < numParticles; i++){
         Particle *newParticle = new Particle(dimensions, function);
@@ -70,7 +71,6 @@ void Swarm::randomTop(int k, int dimensions, string function){
         if (particles[i]->getPBestValue() < gBestValue){
             gBestValue = particles[i]->getPBestValue();
             setAllGBestPos(particles[i]->getAllBestPos());
-            setAllGBestAccel(particles[i]->getAllBestAccel());
         }
     
     }
@@ -105,7 +105,7 @@ vector<Particle*> Swarm::initializeNeighborhood(int index, int k){
 
 
 
-/*
+/**
  *Ring topology function.
  */
 
@@ -141,6 +141,9 @@ void Swarm::ringTop(int dimensions){
     }
 }
 
+/**
+ *
+ */
 
 vector<Particle*> Swarm::initializeNeighborhood(int index){
     vector<Particle*> neighborhood;
@@ -217,7 +220,6 @@ void Swarm::vonNeumannTop(int dimensions, string function){
         if (particles[i]->getPBestValue() < gBestValue){
             gBestValue = particles[i]->getPBestValue();
             setAllGBestPos(particles[i]->getAllBestPos());
-            setAllGBestAccel(particles[i]->getAllBestAccel());
         }
     }
 }
@@ -268,7 +270,7 @@ vector<Particle*> Swarm::initializeNeighborhood(int index, int rows, int cols){
     //left particle
     //if index is on left edge
     if (index % cols == 0){
-        neighborhood.push_back(particles[index+cols-1]);
+        neighborhood.push_back(particles[index+(cols-1)]);
     }
     else{
         neighborhood.push_back(particles[index-1]);
@@ -277,7 +279,7 @@ vector<Particle*> Swarm::initializeNeighborhood(int index, int rows, int cols){
     //right particle
     //if index is on right edge
     if ((index+1) % cols == 0){
-        neighborhood.push_back(particles[index-cols-1]);
+        neighborhood.push_back(particles[index-(cols-1)]);
     }
     else{
         neighborhood.push_back(particles[index+1]);
@@ -301,7 +303,6 @@ int Swarm::findFactor(){
 }
 
 /**
->>>>>>> Von Neumann Implemented
  * Get global best position function
  */
 
@@ -310,27 +311,11 @@ double Swarm::getGBestPos(int dimNumber) {
 }
 
 /**
- * Get global best acceleration function
- */
-
-double Swarm::getGBestAccel(int dimNumber) {
-    return gBestAccel.at(dimNumber);
-}
-
-/**
  * Set global best position function
  */
 
 void Swarm::setGBestPos(int dimNumber, double newGBestPos) {
     gBestPos.at(dimNumber) = newGBestPos;
-}
-
-/**
- * Set global best acceleration
- */
-
-void Swarm::setGBestAccel(int dimNumber, double newGBestAccel){
-    gBestAccel.at(dimNumber) = newGBestAccel;
 }
 
 /**

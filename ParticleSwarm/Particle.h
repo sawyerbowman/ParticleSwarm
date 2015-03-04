@@ -39,11 +39,9 @@ public:
     //getter functions
     vector<double> getAllPositions() { return position; }
     vector<double> getAllBestPos() { return pBestPos; }
-    vector<double> getAllBestAccel() { return pBestAccel; }
     
     double getPosition(int dimNumber) { return position[dimNumber]; }
     double getVelocity(int dimNumber) { return velocity[dimNumber]; }
-    double getAccel(int dimNumber) { return acceleration[dimNumber]; }
     double getPBest(int dimNumber) { return pBestPos[dimNumber]; }
     double getPBestValue(){ return pBestValue; }
     long getNumDim(){ return position.size(); };
@@ -53,7 +51,6 @@ public:
     
     void setPosition(int dimNumber, double posValue) { position[dimNumber] = posValue; }
     void setVelocity(int dimNumber, double velValue) { velocity[dimNumber] = velValue; }
-    void setAccel(int dimNumber, double accelValue) { acceleration[dimNumber] = accelValue; }
     void setPBest(int dimNumber, double posValue) { pBestPos[dimNumber] = posValue; }
     void setPBestValue(double newPBestValue) { pBestValue = newPBestValue; }
     
@@ -74,13 +71,9 @@ private:
     //information about the particle's velocity as a vector
     vector<double> velocity;
     
-    //information about the particle's acceleration as a vector
-    vector<double> acceleration;
-    
     //information about the personal best positions, accelerations, and values
     vector<double> pBestPos;
 
-    vector<double> pBestAccel;
     double pBestValue;
     
 };

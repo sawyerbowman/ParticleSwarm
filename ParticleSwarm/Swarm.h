@@ -29,16 +29,13 @@ public:
     
     //getter functions
     double getGBestPos(int dimNumber);
-    double getGBestAccel(int dimNumber);
     double getBestValue(){ return gBestValue; };
     double getNumParticles(){ return numParticles; };
     
     //setter functions
     void setAllGBestPos(vector<double> newBestPos) { gBestPos = newBestPos; }
-    void setAllGBestAccel(vector<double> newBestAccel) {gBestAccel = newBestAccel; }
     
     void setGBestPos(int dimNumber, double newGBestPos);
-    void setGBestAccel(int dimNumber, double newGBestAccel);
     void setGBestValue(double newGBestValue);
     
     //topology functions
@@ -65,7 +62,6 @@ private:
     
     //global best information
     vector<double> gBestPos;
-    vector<double> gBestAccel;
     double gBestValue;
     
     //number of particles in swarm

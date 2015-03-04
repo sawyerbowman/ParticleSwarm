@@ -33,7 +33,7 @@ void ParticleSwarmAlgorithm::run(){
     for (int gen = 0; gen < iterations; gen++){
         //Run Global topology
         if(topology == "gl"){
-            //swarm->globalTop();
+            swarm->globalTop(dimensions, function);
         }
         //Run Ring topology
         else if (topology == "ri"){
@@ -47,7 +47,7 @@ void ParticleSwarmAlgorithm::run(){
         else {
             swarm->randomTop(5, dimensions, function);
         }
-        cout << "iteration " << gen << " gbest value = " << swarm->getBestValue();
+        cout << "iteration " << gen << " gbest value = " << swarm->getBestValue() << endl;
     }
     
     cout << "Derp!" << endl;

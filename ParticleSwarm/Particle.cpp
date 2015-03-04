@@ -35,7 +35,6 @@ Particle::Particle(int dimensions, string function){
         pos[1] = RAS_POS[1];
         vel[0] = RAS_VEL[0];
         vel[1] = RAS_VEL[1];
-        
     }
     
     //intialize a position and velocity for each particle (randomly within range)
@@ -64,10 +63,10 @@ double Particle::getRandomNumberInRange(double min, double max){
 
 double Particle::eval(string function, vector<double> position){
     
-    if(function == "ROSENBROCK"){
+    if(function == "ros"){
         return evalRosenbrock(position);
     }
-    else if(function == "ACKLEY"){
+    else if(function == "ack"){
         return evalAckley(position);
     }
     else{
