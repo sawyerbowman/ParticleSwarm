@@ -45,7 +45,7 @@ void ParticleSwarmAlgorithm::run(){
         }
         //Run Random topology
         else {
-            swarm->randomTop(5, function);
+            swarm->randomTop(5, dimensions, function);
         }
         cout << "iteration " << gen << " gbest value = " << swarm->getBestValue();
     }
