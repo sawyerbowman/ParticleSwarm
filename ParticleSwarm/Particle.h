@@ -38,6 +38,9 @@ public:
     
     //getter functions
     vector<double> getAllPositions() { return position; }
+    vector<double> getAllBestPos() { return pBestPos; }
+    vector<double> getAllBestAccel() { return pBestAccel; }
+    
     double getPosition(int dimNumber) { return position[dimNumber]; }
     double getVelocity(int dimNumber);
     double getAccel(int dimNumber);
@@ -47,6 +50,7 @@ public:
     
     //setter functions
     void setAllBestPositions(vector<double> bestPos) { pBestPos = bestPos; }
+    
     void setPosition(int dimNumber, double posValue);
     void setVelocity(int dimNumber, double velValue);
     void setAccel(int dimNumber, double accelValue);
