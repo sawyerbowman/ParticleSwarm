@@ -37,7 +37,7 @@ void ParticleSwarmAlgorithm::run(){
         }
         //Run Ring topology
         else if (topology == "ri"){
-            //swarm->ringTop();
+            swarm->ringTop(dimensions);
         }
         //Run Von Neumann topology
         else if (topology == "vn"){
