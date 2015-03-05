@@ -28,10 +28,12 @@ ParticleSwarmAlgorithm::ParticleSwarmAlgorithm(string topology, int swarmSize,
  *The main algorithm: calls the designated toplogy
  */
 
-void ParticleSwarmAlgorithm::run(){
+double ParticleSwarmAlgorithm::run(){
     //go through the maximum number of iterations
     for (int gen = 0; gen < iterations; gen++){
         swarm->update(dimensions, function, topology);
-        cout << "iteration " << gen << " gbest value = " << swarm->getBestValue() << endl;
+        //cout << "iteration " << gen << " gbest value = " << swarm->getBestValue() << endl;
     }
+    
+    return swarm->getBestValue();
 }

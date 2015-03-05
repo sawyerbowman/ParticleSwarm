@@ -21,7 +21,7 @@ public:
     ParticleSwarmAlgorithm(string topology, int swarmSize, int iterations, string
                            function, int dimensions);
     
-    void run();
+    double run();
     
 private:
     string topology;
